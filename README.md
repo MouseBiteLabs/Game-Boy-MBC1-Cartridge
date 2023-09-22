@@ -8,7 +8,7 @@ This circuit board should cover most, if not all, MBC1 games. The features are a
 - Compatibility with all four of the popular Game Boy battery management ICs - MM1026, MM1134, BA6129, and BA6735 (though you may have to add a few extra parts)
 - The option to add battery backup to the cartridge *without* the need of the original battery management ICs - perfect for MBC1 donors that didn't have batteries in them
 - Lower battery consumption compared to some of the original cartridges
-- Fully compatible with the GBxCart RW so you can transfer games and save files to and from the board
+- Fully compatible with the <a href="https://www.gbxcart.com/">GBxCart RW</a> so you can transfer games and save files to and from the board
 
 [image of board scan]
 [image of assembled board]
@@ -17,7 +17,7 @@ All gerbers and source files can be found in this repo, as this project is fully
 
 ## Disclaimer
 
-I am not responsible for any damage you do to your self or your property. Attempt this project at your own risk.
+I am not responsible for any damage you do to your self or your property. I do not guarantee design compatibility. Attempt this project at your own risk.
 
 ## Board Characteristics and Order Information
 
@@ -35,13 +35,43 @@ You can alternatively use the zipped folder at any board fabricator you like. Yo
 
 [link]
 
+The board is also listed on OshPark as well. **Be sure to get them in 0.8mm thickness if you order from here.**
+
+[link]
+
 ## Board Configurations
 
-Talk about jumpers and part possibilities.
+The board comes with four sets of jumper pads for solder bridges. SJ1 and SJ2 require you to solder bridge the middle pad either to the top pad or the bottom pad. SJ3 and SJ4 are configured by either leaving them alone or bridging them with solder. Here are the situations where you need to add solder bridges.
+
+### ROM/RAM Size Selection (SJ1 and SJ2)
+
+You must configure these pads for every game you make. Do not leave them empty. <a href="https://catskull.net/gb-rom-database/">You can find a list of games here with their respective ROM and RAM sizes.</a>
+
+- Solder bridge SJ1 and SJ2 from their middle pads to the bottom pads for games that have larger RAM sizes (up to 4 Mb of ROM and up to 256 Kb of RAM).
+
+- Solder bridge SJ1 and SJ2 from their middle pads to the top pads for games that have larger ROM sizes (up to 16 Mb of ROM and up to 64 Kb of RAM).
+
+- SJ1 and SJ2 must be soldered in the same direction.
+
+[picture]
+
+### Making Games Without a U4 Donor Chip (SJ3)
+
+The main function of U4 is battery management. It manages power from the battery to keep save data on the SRAM even when the Game Boy is off, shuts off components as power drops to prevent erroneous operation, and makes sure the SRAM is in a low-power state when running on battery power.
+
+U4 can only be obtained from an existing Game Boy cartridge (or, potentially bought secondhand from eBay or AliExpress). U4 can be either MM1026 (or the equivalent BA6129) or MM1134 (or the equivalent BA6735). But, if you don't have one of these chips, you can use other parts that are commercially available to replace the function of these chips.
+
+If you are not using U4, and instead using other parts for battery management, you must bridge SJ3. **But, this includes games that have no SRAM at all!** If your game does not have any save functionality, and you don't have U4 populated, you must bridge SJ3 too.
+
+### Using an MM1134 or BA6735 for U4 (SJ4)
+
+Bridge the jumper SJ4 if you have either an MM1134 or BA6735 for U4, specifically.
 
 ## Bill of Materials (BOM)
 
-Your parts list will vary depending on the game you are trying to make. Note that C5 - C7 footprints are only included for edge cases that may require them; you can ignore them unless you run into issues.
+Your parts list will vary depending on the game you are trying to make, and what chips you have for the battery management (if any). Note that C5 - C7 footprints are only included for edge cases that may require them; you can ignore them unless you run into issues.
+
+Please carefully review the parts you need for the board you are trying to make. Do not add any parts to your build that don't appear in the column for the game you are making. This means you *cannot* populate every component on the board at the same time.
 
 | Reference Designators | Value/Part Number              | Package          | Description        | No save carts | Save carts with MM1134 or BA6735 | Save carts with MM1026 or BA6129 | Save carts without donor U4 chip | Source                                           |
 | --------------------- | ------------------------------ | ---------------- | ------------------ | ------------- | -------------------------------- | -------------------------------- | -------------------------------- | ------------------------------------------------ |
@@ -73,16 +103,32 @@ Your parts list will vary depending on the game you are trying to make. Note tha
 | U5                    | TPS3840DL42                    | SOT-23-5         | Supervisory IC     |               |                                  |                                  | X                                | [https://mou.sr/46lxKxA](https://mou.sr/46lxKxA) |
 | U6                    | LM66100DCKR                    | SC70-6           | Ideal Diode        |               |                                  |                                  | X                                | [https://mou.sr/450kfSE](https://mou.sr/450kfSE) |
 
+## Things to Remember
+
+- For battery management, use either U4 *or* U5 and U6 and supporting components. **Do not** use U4, U5, and U6 all on one board. They will interfere with each other.
+- Kb is kilo**bits** and Mb is mega**bits**. Sometimes you will find game ROM and RAM sizes defined in terms of KB or kilo**bytes** and MB or mega**bytes**. You can convert Kb and Mb to KB and MB by dividing Kb or Mb by 8. For example, 256 Kb = 32 KB.
+- You only need to provide ROM and RAM chips that have at least *or greater* the size of the game you are trying to make. That means you can use a 256Kb SRAM chip for a game that only requires 64Kb!
+
 ## Revision History
+
+### v1.1
+- Widen SRAM footprint for easier soldering
+- Changed silkscreen for clarity
 
 ### v1.0
 - Release revision
 
-## Resources
+## Resources and Acknowledgements
 
-- Gekkio's site
-- Jeff's site
-- MGGC discord
+- <a href="http://www.devrs.com/gb/files/hardware.html">Jeff Frohwein's GameBoy Tech Page</a>
+- <a href="https://gbhwdb.gekkio.fi/">Game Boy Hardware Database</a>
+- <a href="https://catskull.net/gb-rom-database/">Nintendo Gameboy Game List</a>
+- <a href="https://wiki.tauwasser.eu/view/MBC1">Tauwasser's Wiki</a>
+- <a href="https://www.ti.com/lit/ds/symlink/lm66100.pdf?HQS=dis-dk-null-digikeymode-dsf-pf-null-wwe&ts=1694502124931&ref_url=https%253A%252F%252Fwww.ti.com%252Fgeneral%252Fdocs%252Fsuppproductinfo.tsp%253FdistId%253D10%2526gotoUrl%253Dhttps%253A%252F%252Fwww.ti.com%252Flit%252Fgpn%252Flm66100">LM66100 Datasheet</a>
+- <a href="https://www.alldatasheet.com/datasheet-pdf/pdf/99104/MITSUBISHI/MM1026.html">System Reset IC Datasheet</a>
+- Board outline from <a href="https://tinkerer.us/projects/homebrew-gameboy-cartridge.html">Dillon Nichols's Homebrew Gameboy Cartridge project</a>
+- Thank you to <a href="https://github.com/Gekkio">gekkio</a> for their deep Game Boy knowledge resources, and for collaboration in demystifying some of the design choices on Game Boy cartridges
+- Thanks to the awesome members of the <a href="https://moddedgameboy.club/">Modded Gameboy Club</a> for their feedback and support during the entire project development
 
 ## License
 
