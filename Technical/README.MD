@@ -24,13 +24,13 @@ Very briefly, I will categorize the different pins on the 32-pin cartridge edge 
 
 Ensuring current coming out of the battery is as minimal as possible while the Game Boy is turned off is crucial for long-lasting save data. The higher the current, the lower the battery life! But we need to do this without breaking compatibility with normal operation. So here are the things we need to keep in mind:
 
-1) SRAM must have continuous power to retain save data
+1) SRAM must have continuous power to retain save data.
 
-2) Data on the SRAM must be accessible during normal gameplay
+2) Data on the SRAM must be accessible during normal gameplay.
 
-3) The number of battery-powered current-consuming components should be minimized, and those that are powered must use as little current as possible
+3) The number of battery-powered current-consuming components should be minimized, and those that are powered must use as little current as possible.
 
-4) Operation while the voltage is ramping down after turning off the power switch must be restricted to prevent junk data from being written to cartridge RAM 
+4) Operation while the voltage is ramping down after turning off the power switch must be restricted to prevent junk data from being written to cartridge RAM.
 
 Original MBC1 carts manage all of this with U4, which was typically MM1026 or the equivalent BA6129. Later Game Boy carts used more advanced versions of these chips - the MM1134 or the equivalent BA6375 - that had an extra control line for easier SRAM control. I'll go over the function here, and for convenience, I'll be using the MM numbers when talking about them. I have also created a modern replacement for these components, in the event a donor cartridge you're using for the MBC1 chip does not include a backup battery. But first, a bit more background information. 
 
@@ -38,7 +38,7 @@ Original MBC1 carts manage all of this with U4, which was typically MM1026 or th
 
 For most Game Boy games, there were two main sizes of SRAM chips used - 64 Kbit and 256 Kbit (further refered to as just 64K or 256K). The pinouts of these two types of chips are nearly identical: 
 
-[pinout of SRAMs] 
+
 
 The big differences are the number of address pins and the number of chip enable pins. The 64K chip has 13 address pins and two chip enables (/CE and CE2), and the 256K chip has 15 address pins and one chip enable (just /CE). The additional address pins on the 256K SRAM gives it more memory, but one of the chip enable pins had to be sacrificed to accommodate this. This is kind of important, because the chip enable pins influence two main things - they tell the chip when data is being accessed, *and* how much current the chip is drawing during standby. For 64K SRAM chips, that's pretty easy - use one chip enable pin for data access, and the other for data retention mode. But for 256K SRAM, you have to do both of those functions at once. Look at the requirements for the low "data retention current" on the AS6C6264 datasheet and the AS6C62256 datasheet:
 
