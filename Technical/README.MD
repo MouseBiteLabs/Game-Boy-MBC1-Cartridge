@@ -38,9 +38,7 @@ Original MBC1 carts manage all of this with U4, which was typically MM1026 or th
 
 For most Game Boy games, there were two main sizes of SRAM chips used - 64 Kbit and 256 Kbit (further refered to as just 64K or 256K). The pinouts of these two types of chips are nearly identical: 
 
-
-
-
+[pinouts]
 
 The big differences are the number of address pins and the number of chip enable pins. The 64K chip has 13 address pins and two chip enables (/CE and CE2), and the 256K chip has 15 address pins and one chip enable (just /CE). The additional address pins on the 256K SRAM gives it more memory, but one of the chip enable pins had to be sacrificed to accommodate this. This is kind of important, because the chip enable pins influence two main things - they tell the chip when data is being accessed, *and* how much current the chip is drawing during standby. For 64K SRAM chips, that's pretty easy - use one chip enable pin for data access, and the other for data retention mode. But for 256K SRAM, you have to do both of those functions at once. Look at the requirements for the low "data retention current" on the AS6C6264 datasheet and the AS6C62256 datasheet:
 
@@ -50,7 +48,7 @@ For 64K, /CE needs to be at VCC, *or* CE2 needs to be at GND for the current to 
 
 On original MBC1 cartridges, games that have 64K SRAM used the MBC1 for controlling the /CE pin for data access, and U4 (MM1026) for keeping CE2 at GND when power was off. But for 256K SRAM, that CE2 pin wasn't available anymore. Instead, the MBC1 was powered off of the battery as well, and had internal logic to keep /CE logic high when disabled. The MM1026 has a /CE output as well that will pull the output up to the battery voltage, however it *does not* have a way to allow the /CE pin to be accessed during normal gameplay. So the MBC1 needs to take care of both functions, but since it's powered from the battery when power is off, that means the battery life would be impacted. A necessary evil, without adding extra parts to the board or using a different kind of battery management chip. I don't know how much current the MBC1 pulls from the battery for games that had 256K SRAM, but I imagine it probably wasn't a whole lot - I would still expect 64K SRAM games to last longer though.
 
-On my custom MBC1 board, however, I implement a method of accessing the RAM /CE pin *and* keeping it in a low power state, without needing the MBC1 to be powered by the battery, but introducing a few extra parts. I'll talk about that in a later section. But this SRAM background explains points 1 through 3 above. Onto point 4.
+On my custom MBC1 board, I implement a method of accessing the RAM /CE pin *and* keeping it in a low power state, without needing the MBC1 to be powered by the battery, but introducing a few extra parts. I'll talk about that in a later section. But this SRAM background explains points 1 through 3 above. Onto point 4.
 
 ### Power-Off Considerations 
 
@@ -58,11 +56,15 @@ When you turn the power switch off on a DMG, the voltage on the VCC supply will 
 
 In order to prevent this, cartridges that have battery-backed SRAM on them use the battery management chip U4 to shut down operation of the CPU on pin 30 of the cart edge - the /RST (or /RESET) line. Asserting this to GND will stop all operation on the I/O pins, preventing corruption from occuring. According to the MM1026 datasheet, this happens whenever VCC is below 4.2 V.
 
+[MM1026 internal schematic]
+
 But that's not all the MM chip does. It also is used to pull the MBC1's /RESET pin to GND as well. This is especially important for 256K SRAM games that needed the MBC1 to be powered from the battery, as keeping this pin off will (assumedly) keep current draw of the MBC1 to a minimum. Furthermore, pulling this pin to GND also causes the MBC1 to assert the SRAM's /CE pin high to keep the SRAM in a low power state. 
 
 One minor but important note - there are actually two outputs on the MM1026 that go low when power is below 4.2 V. One of them is open collector (pin 2, the "/RESET" output), and one is instead driven high by an internal transistor or pulled low by an internal pull-down (pin 3, the "CS" output). This is important because it means you cannot safely use the CS pin to control the Game Boy's /RESET line. 
 
 On the DMG, the CPU's /RESET line is also connected to half of the power switch. When the switch is fully turned off, the /RESET line is pulled to GND directly. This means that to ensure no damage is done to the battery management chip, any output connected to this line must be open collector. Open collector outputs can either float their output, or (in this case) pull it to GND. That means pulling it to GND with the switch won't damage anything internal to the chip. But, in the case of pin 2 on the MM1026, there can be a scenario where the MM1026 voltage isn't at GND yet, but the power switch has been fully actuated. That would create a path *through* the MM1026's CS pin from the VCC supply to GND, meaning that pin's driving transistor would experience a surge of current. Since the output is not designed to do that, it could cause damage to the part. 
+
+[output schematics and dmg schematic of /reset]
 
 *Funny enough, on the GBC, they added a chip that pulls the /RESET line to GND through an open collector output whenever the voltage on VCC drops below 3.5 V. If the DMG had this, maybe Nintendo wouldn't have needed these MM chips but could use something a bit simpler. But we must design cartridges with DMG compatibility in mind!* 
 
