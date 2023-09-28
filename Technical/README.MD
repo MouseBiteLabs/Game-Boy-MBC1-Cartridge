@@ -4,6 +4,8 @@ This write-up will serve as an attempt of explaining some of the features on thi
 
 ## Schematic
 
+![image](https://user-images.githubusercontent.com/97127539/219991707-c83d69cf-715f-4326-8e82-952a977f087f.png)
+
 ## Cart Edge Pins
 
 Very briefly, I will categorize the different pins on the 32-pin cartridge edge connector.
