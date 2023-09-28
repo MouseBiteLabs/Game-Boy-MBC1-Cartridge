@@ -38,7 +38,7 @@ Other pins include:
 - The RAM's /WE pin is connected to /WR on the cart edge (pin 3).
 - The RAM's /CE pin requires a bit of explanation, which will be covered in a later section.
 
-## Battery Management and Data Retention
+## Battery Management and Data Retention Considerations
 
 Ensuring current coming out of the battery is as minimal as possible while the Game Boy is turned off is crucial for long-lasting save data. The higher the current, the lower the battery life! But we need to do this without breaking compatibility with normal operation. So here are the things we need to keep in mind:
 
@@ -108,29 +108,24 @@ But, in the case of pin 3 on the MM chips, the "CS output" pin, imagine a scenar
 
 In conclusion, any output connected to the /RESET net on the Game Boy *must* be open collector.
 
-*Funny enough, on the GBC, they added a chip that pulls the /RESET line to GND through an open collector output whenever the voltage on VCC drops below 3.5 V, instead of using the power switch to ground the input. If the DMG had this, maybe Nintendo wouldn't have needed these MM chips but could use something a bit simpler. But we must design cartridges with DMG compatibility in mind!* 
+*On the GBC, they added a chip that pulls the /RESET line to GND through an open collector output whenever the voltage on VCC drops below 3.5 V, instead of using the power switch to ground the input. If the DMG had this, maybe Nintendo wouldn't have needed these MM chips but could use something a bit simpler. But we must design cartridges with DMG compatibility in mind!* 
 
-### Using an Original MM-series Chip for Battery Management
+## Battery Management Implementation Options
 
-For reference, here is a pinout diagram of the MM1026 and MM1134.
+Ok, with the background taken care of, I'll talk about how my MBC1 board manages all of this, and the different compatibility options. If you reference the schematic above, you will see three options for games that use SRAM:
+1) MM1134
+2) MM1026 with "Group B" components
+3) "Group A" and "Group B" components
 
-[picture] 
+### Using an MM1134
 
-### Creating a Battery Bus
+For reference again, here is a pinout diagram of the MM1026 and MM1134.
 
-In order for the SRAM to retain data, it must be powered at all times. If it loses power, even for a few microseconds, all the data can be erased. But, we don't want to have to rely on battery power while the cartridge is on; we want the Game Boy to power the SRAM in that situation. The MM chip caters to this with its two input voltage pins - pin 8 for the cart power VCC, and pin 4 for the battery power VBATT. Pin 6, VOUT, is the combination of these two inputs. VOUT is supplied by whichever input is higher, without interruption of power.
+![image](https://github.com/MouseBiteLabs/Game-Boy-MBC1-Cartridge/assets/97127539/14222e38-5504-4b65-b9eb-a328e508ca50)
 
-### Discrete Replacement of U4
+### Using an MM1026
 
-#### Creating a Battery Bus
-
-We can use a simple diode-or supply to achieve this, but diodes drop a bit of voltage as current flows through them. It's much better to use an ideal diode set up.
-
-### Reset IC (U4)
-
-### Group B Components
-
-### Group A Components
+### Using Brand New Components
 
 ## Estimating Battery Life
 
@@ -143,6 +138,14 @@ So for an overall equation to determine the very approximate number of years the
 Years = Resistance of R1 (ohms) * Battery capacity (mAh) / Voltage (mV) / 8760 
 
 For an example: an MBC1 cartridge made according to the BOM where R1 is 10 kΩ (or 10000 Ω), using a CR2025 rated for 165 mAh, and a voltage of 10 mV measured across the terminals of R1, yields 10000 * 165 / 10 / 8760 = 18.84 years of battery survival. This number can be different due to changing environmental conditions, self-discharge of the battery, and also actual capacity of the battery, so a more conservative estimate would probably be about 15 years.
+
+## A Few Extra Capacitors
+
+I added spots for a few extra capacitors, in the event some compatibility issues arise. By default, you can likely just ignore these components, as they were not present in most cartridges, but adding them probably doesn't hurt anything.
+
+1) C5 is a capacitor connected nearby the MBC1's /RESET pin to GND. A spot for this capacitor was included on some MBC1 carts, but I cannot locate an instance of it actually being used when looking through the gbhwdb.
+2) C6 is a capacitor connected nearby the MBC1's /WR pin to GND. These were populated on some cartridges, and have a value of approximately 1 nF (0.001 uF).
+3) C7 is a capacitor that I have added that was not used on any original Game Boy board. It connects to the SRAM's /CE pin, bypassing to GND. I have added this in the event incompatibilities arise with newer SRAM chips that have much faster speeds than older SRAM chips. This was a problem I encountered on some of my NES cartridges, so this is here just in case.
 
 ## Resources
 
