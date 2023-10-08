@@ -4,6 +4,10 @@ This write-up will serve as an attempt of explaining some of the features on thi
 
 ## Schematic
 
+Note to self: Double check this is up-to-date.
+
+![image](https://github.com/MouseBiteLabs/Game-Boy-MBC1-Cartridge/assets/97127539/632dedda-7673-44e6-9397-33d28c5f9e99)
+
 ## Cart Edge Pins
 
 Very briefly, I will categorize the different pins on the 32-pin cartridge edge connector.
@@ -92,6 +96,8 @@ Essentially, the /CS output will follow the /Y input, *unless* VCC is below the 
 
 *Note: If you ground the /Y input, then the MM1134 will act exactly like an MM1026.*
 
+On the gbhwdb, there are only a few cartridge PCBs that use an MM1134 (the BA6735 equivalent, specifically) - DMG-DECN-20 and DMG-DGCU-10 - but these boards use 64K of SRAM, so this extra /Y pin goes unused. 
+
 ### Open Collector Requirements on CPU /RESET Input
 
 One minor but important note - there are actually two outputs on the MM1026/MM134 that go low when power is below 4.2 V. One of them is open collector (pin 2, the "Reset output"), and one is instead driven high by an internal transistor or pulled low by an internal pull-down (pin 3, the "CS output"). This is important because it means *you cannot safely use the CS output pin to control the Game Boy's /RESET line.*
@@ -101,6 +107,8 @@ One minor but important note - there are actually two outputs on the MM1026/MM13
 On the DMG, the CPU's /RESET input is also connected to half of the power switch. When the switch is fully turned off, the /RESET input is pulled to GND directly.
 
 ![image](https://github.com/MouseBiteLabs/Game-Boy-MBC1-Cartridge/assets/97127539/601c3760-1945-438b-b4e6-52c71d4de8ae)
+
+*[Image adapted from <a href="https://github.com/Gekkio/gb-schematics/blob/main/DMG-CPU-06/schematic/DMG-CPU-06.pdf">gekkio's DMG CPU board schematic</a>]*
 
 This means that to ensure no damage is done to the battery management chip, any output connected to the Game Boy's /RESET input must be **open collector**. Open collector outputs can either float their output, or (in this case) pull it to GND - reference the "Pin 2 Reset Output" schematic above. That means pulling it to GND with the power switch won't damage anything internal to the chip, it will just safely bypass the pin's function.
 
@@ -117,15 +125,54 @@ Ok, with the background taken care of, I'll talk about how my MBC1 board manages
 2) MM1026 with "Group B" components
 3) "Group A" and "Group B" components
 
-### Using an MM1134
+### Using an MM Chip
 
 For reference again, here is a pinout diagram of the MM1026 and MM1134.
 
 ![image](https://github.com/MouseBiteLabs/Game-Boy-MBC1-Cartridge/assets/97127539/14222e38-5504-4b65-b9eb-a328e508ca50)
 
-### Using an MM1026
+And here is the section of the schematic for using one of these chips.
+
+![image](https://github.com/MouseBiteLabs/Game-Boy-MBC1-Cartridge/assets/97127539/b89a5468-c783-4dbd-8fba-3c0f77e3ab8e)
+
+#### Creating the Battery-Backed Power Supply
+
+The VOUT pin is a combination of the VCC and VBAT pins. VCC is connected to the Game Boy's 5V supply, and VBAT is connected to the battery (through a current-limiting resistor). When VCC drops below 3.3V during power-down, the MM chip switches VOUT to be supplied by VBAT instead of VCC. Conversely, when it passes above 3.3V during power-on, the MM chip switches VOUT to be supplied by VCC instead. This guarantees constant power to the SRAM to keep save data retained at all times, assuming the battery is not dead.
+
+#### Reset Pin Management
+
+Because the /RESET input pin on the cart edge must be open collector, the open collector output of the MM chip, pin 2, is connected to the /RESET cart edge pin (pin 30). The MBC's /RESET input, pin 10, is connected to the driven CS output of the MM chip, pin 3.
+
+#### Controlling the SRAM /CE Pin (MM1134)
+
+The RAM_/CS output of the MBC1 is connected to the /Y input (pin 7) of the MM1134, and if SJ4 is bridged to connect it to RAM_/CS_G (as it should be when using an MM1134), the /CS output (pin 5) will be connected to the SRAM /CE input. As explained earlier, the state of the /CS output of the MM1134 is the same as the /Y input, unless VCC is below 4.2V, in which case the /CS output is pulled up to the VOUT voltage to satisfy low-current data retention requirements of the SRAM.
+
+#### Controlling the SRAM /CE Pin (MM1026)
+
+Because the MM1026 does not have the gated /CS output functionality, and the MBC1 is not powered by the battery on my cart design, we need to add the function back with some external components, which I have labelled as "Group B" components in the schematic. You also need to add R9 to connect the ST net on the base of Q1 to the MBC_/RST net, which is connected to the driven CS output pin on the MM1026.
+
+![image](https://github.com/MouseBiteLabs/Game-Boy-MBC1-Cartridge/assets/97127539/a901f533-c4fc-4b7c-aa51-e2bb8754c418)
+
+![image](https://github.com/MouseBiteLabs/Game-Boy-MBC1-Cartridge/assets/97127539/2a7c3031-303a-4c16-acf4-4a1af0b0b1d8)
+
+As a reminder: RAM_/CS connects to the MBC1's RAM_/CS output pin, RAM_/CS_G connects to the SRAM's /CE input, and VCC_SRAM connects to the MM1026 VOUT pin.
+
+- When the CS output is driven low (when VCC is below 4.2V), conduction between the collector and emitter of Q1 will be off; the RAM_/CS_G net will be pulled up to the battery-backed voltage via R7, no matter what RAM_/CS is doing.
+- When the CS output is driven high (when VCC is above 4.2V), conduction between the collector and emitter of Q1 is allowed; RAM_/CS_G will follow the RAM_/CS output, which will allow the MBC1 to control the SRAM /CE input.
+
+Thus, this circuit essentially adds the MM1134's gated /CS output functionality back into the circuit.
 
 ### Using Brand New Components
+
+If you do not have one of these MM chips, as you can only typically get them from donor Game Boy cartridges and not all games use them, you can achieve the same results using commercially-available components. In order to do so, you need both "Group A" and "Group B" components. Do not add R9 in this case, but *do* bridge SJ3.
+
+![image](https://github.com/MouseBiteLabs/Game-Boy-MBC1-Cartridge/assets/97127539/7357c5ab-ef00-431a-99fa-b1669b795c4d)
+
+![image](https://github.com/MouseBiteLabs/Game-Boy-MBC1-Cartridge/assets/97127539/a901f533-c4fc-4b7c-aa51-e2bb8754c418)
+
+![image](https://github.com/MouseBiteLabs/Game-Boy-MBC1-Cartridge/assets/97127539/2a7c3031-303a-4c16-acf4-4a1af0b0b1d8)
+
+Explain here.
 
 ## Estimating Battery Life
 
@@ -141,7 +188,9 @@ For an example: an MBC1 cartridge made according to the BOM where R1 is 10 kΩ (
 
 ## A Few Extra Capacitors
 
-I added spots for a few extra capacitors, in the event some compatibility issues arise. By default, you can likely just ignore these components, as they were not present in most cartridges, but adding them probably doesn't hurt anything.
+I added spots for a few extra capacitors, in the event some compatibility issues arise. By default, you should ignore these components, as they were not present in most cartridges. If I find instances where they are needed, I will note them in this repo. For now, assume they are unnecessary.
+
+![image](https://github.com/MouseBiteLabs/Game-Boy-MBC1-Cartridge/assets/97127539/2da9b702-0144-4cd9-94ec-b4f23f3c3b7d)
 
 1) C5 is a capacitor connected nearby the MBC1's /RESET pin to GND. A spot for this capacitor was included on some MBC1 carts, but I cannot locate an instance of it actually being used when looking through the gbhwdb.
 2) C6 is a capacitor connected nearby the MBC1's /WR pin to GND. These were populated on some cartridges, and have a value of approximately 1 nF (0.001 uF).
