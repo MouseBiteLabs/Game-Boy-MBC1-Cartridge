@@ -63,11 +63,11 @@ Original MBC1 carts manage all of this with U4, which was typically MM1026 or th
 
 For most Game Boy games, there were two main sizes of SRAM chips used - 64 Kbit and 256 Kbit (further refered to as just 64K or 256K). The pinouts of these two types of chips are nearly identical: 
 
-![image](https://github.com/MouseBiteLabs/Game-Boy-MBC1-Cartridge/assets/97127539/63e3da82-bc68-4ffa-b1d4-43e77c5ee111)
+![image](https://github.com/MouseBiteLabs/Game-Boy-MBC1-Cartridge/assets/97127539/3d5b20d1-d4e6-4598-b218-566d6fefaa61)
 
 The big differences are the number of address pins and the number of chip enable pins. The 64K chip has 13 address pins and two chip enables (/CE and CE2), and the 256K chip has 15 address pins and one chip enable (just /CE). The additional address pins on the 256K SRAM gives it more memory, but one of the chip enable pins had to be sacrificed to accommodate this. This is kind of important, because the chip enable pins influence two main things - they tell the chip when data is being accessed, *and* how much current the chip is drawing during standby. For 64K SRAM chips, that's pretty easy - use one chip enable pin for data access, and the other for data retention mode. But for 256K SRAM, you have to do both of those functions at once. Look at the requirements for the low "data retention current" on the AS6C6264 datasheet and the AS6C62256 datasheet:
 
-![image](https://github.com/MouseBiteLabs/Game-Boy-MBC1-Cartridge/assets/97127539/7b344738-187d-4a9a-a395-5fcaa480575d)
+![image](https://github.com/MouseBiteLabs/Game-Boy-MBC1-Cartridge/assets/97127539/40d23786-5e9e-480f-b8f8-28d90928e621)
 
 For 64K, /CE needs to be at VCC, *or* CE2 needs to be at GND for the current to be minimized. For 256K, /CE needs to be at VCC, full stop (in this case, VCC is whatever voltage appears on the SRAM's VCC pin, so when power is off that's the battery voltage). That's not super convenient if the power is off - something needs to make the /CE pin go to VCC, which means whatever that something is better not be pulling a lot of current, lest we lower our battery life.
 
@@ -85,7 +85,7 @@ In order to prevent this, cartridges that have battery-backed SRAM on them use t
 
 *Please note that the MM1026 has a /RESET output pin, but this is not the same as the Game Boy CPU /RESET input, the MBC1 /RESET input, or the cart edge /RST pin 30! I will call the MM1026's pin 2 the "Reset output pin" from now on for clarity.*
 
-![image](https://github.com/MouseBiteLabs/Game-Boy-MBC1-Cartridge/assets/97127539/93550ae7-36ab-4ff0-8d3d-8d426dd7a917)
+![image](https://github.com/MouseBiteLabs/Game-Boy-MBC1-Cartridge/assets/97127539/c3d14c7a-4695-4fc1-92df-16f425d90c79)
 
 But that's not all the MM chip does. It also is used to pull the MBC1's /RESET input to GND as well. This is especially important for original Game Boy MBC1 carts with 256K SRAM that needed the MBC1 to be powered from the battery, as keeping this pin off will (assumedly) keep current draw of the MBC1 to a minimum. Furthermore, pulling this pin to GND also causes the MBC1 to assert the SRAM's /CE pin high to keep the SRAM in a low power state.
 
@@ -93,7 +93,7 @@ But that's not all the MM chip does. It also is used to pull the MBC1's /RESET i
 
 The MM1134 is nearly identical to the MM1026, with one distinct difference. There is one extra input that was previously an unconnected pin on the MM1026 - the /Y input. This input is intended to be used with a RAM /CE signal. It controls the /CS output (pin 5) on the MM1134. See the schematic and timing diagram below:
 
-![image](https://github.com/MouseBiteLabs/Game-Boy-MBC1-Cartridge/assets/97127539/12c48213-6a42-436a-8dc3-078bcd4adad2)
+![image](https://github.com/MouseBiteLabs/Game-Boy-MBC1-Cartridge/assets/97127539/8d95eb57-2370-415c-8ff0-402ed947fdcd)
 
 Essentially, the /CS output will follow the /Y input, *unless* VCC is below the 4.2V power-off threshold. Then, /CS will be pulled to VOUT (the combination of VCC and VBAT). Hey, this is great, because it means we can control that pesky 256K SRAM /CE pin *and* put it in a low power state when the power shuts off!
 
@@ -105,11 +105,11 @@ On the gbhwdb, there are only a few cartridge PCBs that use an MM1134 (the BA673
 
 One minor, but important, note that drives a few design choices - there are actually two outputs on the MM1026/MM134 that go low when power is below 4.2 V. One of them is open collector (pin 2, the "Reset output"), and one is instead driven high by an internal transistor or pulled low by an internal pull-down (pin 3, the "CS output"). This is important because it means *you cannot safely use the CS output pin to control the Game Boy's /RESET line.*
 
-![image](https://github.com/MouseBiteLabs/Game-Boy-MBC1-Cartridge/assets/97127539/0cda9c53-7df3-498b-8542-f712198cce23)
+![image](https://github.com/MouseBiteLabs/Game-Boy-MBC1-Cartridge/assets/97127539/5fb78360-aba5-40cd-b881-bf815daa9ee1)
 
 On the DMG, the CPU's /RESET input is also connected to half of the power switch. When the switch is fully turned off, the /RESET input is pulled to GND directly.
 
-![image](https://github.com/MouseBiteLabs/Game-Boy-MBC1-Cartridge/assets/97127539/601c3760-1945-438b-b4e6-52c71d4de8ae)
+![image](https://github.com/MouseBiteLabs/Game-Boy-MBC1-Cartridge/assets/97127539/225ab129-f5d6-421e-90c0-88530c2a48d6)
 
 *[Image adapted from <a href="https://github.com/Gekkio/gb-schematics/blob/main/DMG-CPU-06/schematic/DMG-CPU-06.pdf">gekkio's DMG CPU board schematic</a>]*
 
@@ -132,7 +132,7 @@ Ok, with the background taken care of, I'll talk about how my MBC1 board manages
 
 For reference again, here is a pinout diagram of the MM1026 and MM1134.
 
-![image](https://github.com/MouseBiteLabs/Game-Boy-MBC1-Cartridge/assets/97127539/14222e38-5504-4b65-b9eb-a328e508ca50)
+![image](https://github.com/MouseBiteLabs/Game-Boy-MBC1-Cartridge/assets/97127539/fd0f15fb-96d5-4d6b-a1fa-3b0cd7466f58)
 
 And here is the section of the schematic for using one of these chips ("Group A" components).
 
