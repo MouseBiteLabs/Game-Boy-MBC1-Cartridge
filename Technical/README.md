@@ -4,7 +4,7 @@ This write-up will serve as an attempt of explaining some of the features on thi
 
 ## Schematic
 
-![image](https://github.com/MouseBiteLabs/Game-Boy-MBC1-Cartridge/assets/97127539/30e0c2c7-4f50-492a-85ba-e7a6fc525997)
+![image](https://github.com/MouseBiteLabs/Game-Boy-MBC1-Cartridge/assets/97127539/d64e9f84-38c7-4899-81bc-2b77d6dac638)
 
 ## Cart Edge Pins
 
