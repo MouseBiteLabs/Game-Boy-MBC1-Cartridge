@@ -27,11 +27,7 @@ The zipped folder contains all the gerber files for this board. The following op
 - Surface Finish: ENIG
 - Gold Fingers: Yes, 30° chamfer
 
-**I sell this board on Etsy, so you don't have to buy multiples from board fabricators:**
-
-[link]
-
-You can alternatively use the zipped folder at any board fabricator you like. You may also buy the board from PCBWay using this link (disclosure: I receive 10% of the sale value to go twoards future PCB orders of my own):
+You can use the zipped folder at any board fabricator you like. You may also buy the board from PCBWay using this link (disclosure: I receive 10% of the sale value to go twoards future PCB orders of my own):
 
 [link]
 
@@ -65,45 +61,45 @@ Bridge the jumper SJ4 if you have either an MM1134 or BA6735 for U4, specificall
 
 If your game does not have RAM on it (and therefore, you don't need the battery management IC U4), bridge SJ4 with solder. **Do not** bridge SJ4 if you are using U5 (TPS3613) instead of U4.
 
-## Bill of Materials (BOM) - update
+## Bill of Materials (BOM)
 
 Your parts list will vary depending on the game you are trying to make, and what chips you have for the battery management (if any). Note that C9 - C11 footprints are only included for edge cases that may require them; you can ignore them unless you run into issues.
 
 Please carefully review the parts you need for the board you are trying to make. Do not add any parts to your build that don't appear in the column for the game you are making. This means you *cannot* populate every component on the board at the same time.
 
-| Reference Designators | Value/Part Number              | Package          | Description        | No-save carts | Save carts with MM1134 or BA6735 | Save carts with MM1026 or BA6129 | Save carts without donor U4 chip | Source                                           |
+| Reference Designators | Value/Part Number              | Package          | Description        | No save carts | Save carts with MM1134 or BA6735 | Save carts with MM1026 or BA6129 | Save carts without donor U4 chip | Source                                           |
 | --------------------- | ------------------------------ | ---------------- | ------------------ | ------------- | -------------------------------- | -------------------------------- | -------------------------------- | ------------------------------------------------ |
-| B1                    | CR2025                         | CR2025           | Backup Battery     |               | X                                | X                                | X                                | [https://mou.sr/3PLccol](https://mou.sr/3PLccol) |
-| C1                    | 0.1uF                          | 0603             | Capacitor (MLCC)   | X             | X                                | X                                | X                                | [https://mou.sr/3ENc15O](https://mou.sr/3ENc15O) |
-| C2                    | 0.1uF                          | 0603             | Capacitor (MLCC)   | X             | X                                | X                                | X                                | https://mou.sr/3ENc15O                           |
-| C3                    | 10uF                           | 0603             | Capacitor (MLCC)   |               | X                                | X                                | X                                | [https://mou.sr/3mZtSkF](https://mou.sr/3mZtSkF) |
-| C4                    | 0.1uF                          | 0603             | Capacitor (MLCC)   |               | X                                | X                                |                                  | https://mou.sr/3ENc15O                           |
-| C5                    | 0.001uF                        | 0603             | Capacitor (MLCC)   |               |                                  |                                  |                                  | [https://mou.sr/3PpAXoM](https://mou.sr/3PpAXoM) |
-| C6                    | 0.001uF                        | 0603             | Capacitor (MLCC)   |               |                                  |                                  |                                  | [https://mou.sr/3PpAXoM](https://mou.sr/3PpAXoM) |
-| C7                    | 0.001uF                        | 0603             | Capacitor (MLCC)   |               |                                  |                                  |                                  | [https://mou.sr/3PpAXoM](https://mou.sr/3PpAXoM) |
-| C8                    | 0.1uF                          | 0603             | Capacitor (MLCC)   |               | X                                | X                                | X                                | https://mou.sr/3ENc15O                           |
-| C9                    | 0.1uF                          | 0603             | Capacitor (MLCC)   |               |                                  |                                  | X                                | https://mou.sr/3ENc15O                           |
-| Q1                    | MMBT3904                       | SOT-23           | NPN BJT            |               |                                  | X                                | X                                | [https://mou.sr/3Rv7yfA](https://mou.sr/3Rv7yfA) |
-| Q2                    | Si2301CDS                      | SOT-23           | P-Channel FET      |               |                                  |                                  | X                                | [https://mou.sr/3LvBdSb](https://mou.sr/3LvBdSb) |
-| R1                    | 10k                            | 0603             | Resistor           |               | X                                | X                                | X                                | https://mou.sr/3riR7IH                           |
-| R2                    | 10k                            | 0603             | Resistor           | X             | X                                | X                                | X                                | https://mou.sr/3riR7IH                           |
-| R3                    | 10k                            | 0603             | Resistor           | X             | X                                | X                                | X                                | https://mou.sr/3riR7IH                           |
-| R4                    | 10k                            | 0603             | Resistor           | X             | X                                | X                                | X                                | https://mou.sr/3riR7IH                           |
-| R5                    | 10k                            | 0603             | Resistor           | X             | X                                | X                                | X                                | https://mou.sr/3riR7IH                           |
-| R6                    | 10k                            | 0603             | Resistor           |               |                                  |                                  | X                                | https://mou.sr/3riR7IH                           |
-| R7                    | 10k                            | 0603             | Resistor           |               |                                  | X                                | X                                | https://mou.sr/3riR7IH                           |
-| R8                    | 10k                            | 0603             | Resistor           | X             | X                                | X                                | X                                | https://mou.sr/3riR7IH                           |
-| R9                    | 10k                            | 0603             | Resistor           |               |                                  | X                                |                                  | https://mou.sr/3riR7IH                           |
+| B1                    | CR2032, CR2025, CR2016         | CR2032           | Backup Battery     |               | x                                | x                                | x                                | [https://mou.sr/3SeAzfT](https://mou.sr/3SeAzfT) |
+| C1                    | 0.1uF                          | 0603             | Capacitor (MLCC)   | x             | x                                | x                                | x                                | [https://mou.sr/3ENc15O](https://mou.sr/3ENc15O) |
+| C4                    | 0.1uF                          | 0603             | Capacitor (MLCC)   |               | x                                | x                                |                                  | [https://mou.sr/3ENc15O](https://mou.sr/3ENc15O) |
+| C5                    | 0.1uF                          | 0603             | Capacitor (MLCC)   |               | x                                | x                                | x                                | [https://mou.sr/3ENc15O](https://mou.sr/3ENc15O) |
+| C6                    | 10uF                           | 0603             | Capacitor (MLCC)   |               | x                                | x                                | x                                | [https://mou.sr/3mZtSkF](https://mou.sr/3mZtSkF) |
+| C7                    | 0.1uF                          | 0603             | Capacitor (MLCC)   | x             | x                                | x                                | x                                | [https://mou.sr/3ENc15O](https://mou.sr/3ENc15O) |
+| C8                    | 0.1uF                          | 0603             | Capacitor (MLCC)   |               |                                  |                                  | x                                | [https://mou.sr/3ENc15O](https://mou.sr/3ENc15O) |
+| C9                    | 0.001uF                        | 0603             | Capacitor (MLCC)   |               |                                  |                                  |                                  | [https://mou.sr/3PpAXoM](https://mou.sr/3PpAXoM) |
+| C10                   | 0.001uF                        | 0603             | Capacitor (MLCC)   |               |                                  |                                  |                                  | [https://mou.sr/3PpAXoM](https://mou.sr/3PpAXoM) |
+| C11                   | 0.001uF                        | 0603             | Capacitor (MLCC)   |               |                                  |                                  |                                  | [https://mou.sr/3PpAXoM](https://mou.sr/3PpAXoM) |
+| Q1                    | 2N7002                         | SOT-23           | N-Channel FET      |               |                                  |                                  | x                                | [https://mou.sr/3rgfh6J](https://mou.sr/3rgfh6J) |
+| Q2                    | 2N7002                         | SOT-23           | N-Channel FET      |               |                                  | x                                |                                  | [https://mou.sr/3rgfh6J](https://mou.sr/3rgfh6J) |
+| R1                    | 10k                            | 0603             | Resistor           |               | x                                | x                                | x                                | [https://mou.sr/3riR7IH](https://mou.sr/3riR7IH) |
+| R3                    | 47k                            | 0603             | Resistor           |               | x                                | x                                | x                                | [https://mou.sr/495cXQN](https://mou.sr/495cXQN) |
+| R4                    | 47k                            | 0603             | Resistor           |               | x                                | x                                | x                                | [https://mou.sr/495cXQN](https://mou.sr/495cXQN) |
+| R5                    | 47k                            | 0603             | Resistor           | x             | x                                | x                                | x                                | [https://mou.sr/495cXQN](https://mou.sr/495cXQN) |
+| R6                    | 47k                            | 0603             | Resistor           | x             | x                                | x                                | x                                | [https://mou.sr/495cXQN](https://mou.sr/495cXQN) |
+| R7                    | 10k                            | 0603             | Resistor           |               |                                  | x                                |                                  | [https://mou.sr/3riR7IH](https://mou.sr/3riR7IH) |
+| R8                    | 10k                            | 0603             | Resistor           | x             | x                                | x                                | x                                | [https://mou.sr/3riR7IH](https://mou.sr/3riR7IH) |
+| R9                    | 124k                           | 0603             | Resistor           |               |                                  |                                  | x                                | [https://mou.sr/46HPWSv](https://mou.sr/46HPWSv) |
+| R10                   | 47k                            | 0603             | Resistor           |               |                                  |                                  | x                                | [https://mou.sr/495cXQN](https://mou.sr/495cXQN) |
 | U1                    | 29F016, 29F032, 29F033         | TSOP-48, TSOP-40 | Flash EEPROM       | X             | X                                | X                                | X                                | AliExpress or eBay                               |
 | U2                    | MBC1                           | SOP-24           | MBC1 Mapper        | X             | X                                | X                                | X                                | Donor MBC1 Game Boy cartridge                    |
 | U3                    | AS6C6264, AS6C62256            | SOP-28           | SRAM               |               | X                                | X                                | X                                | [https://mou.sr/450klcY](https://mou.sr/450klcY) |
 | U4                    | MM1026, MM1134, BA6129, BA6735 | SOIC-8           | Battery Management |               | X                                | X                                |                                  | Donor Game Boy cartridge                         |
-| U5                    | TPS3840DL42                    | SOT-23-5         | Supervisory IC     |               |                                  |                                  | X                                | [https://mou.sr/46lxKxA](https://mou.sr/46lxKxA) |
-| U6                    | LM66100DCKR                    | SC70-6           | Ideal Diode        |               |                                  |                                  | X                                | [https://mou.sr/450kfSE](https://mou.sr/450kfSE) |
+| U5                    | TPS3613                        |                  | Battery Management |               |                                  |                                  | X                                | https://mou.sr/45Ir2kh                           |
 
 ## Things to Remember
 
 - The footprint for the EEPROM is specifically for 29F016 - it has 48 pins. However, 29F032 and 29F033 are only 40 pin devices. They still work fine on the board though - place them in the center of the footprint, and leave the outer two pins on each corner empty.
+- The footprint for the battery can fit a CR2032, CR2025, or CR2016 with solder tabs. The only difference is the mAh capacity (larger number = longer life).
 - The 29F016, 29F032, and 29F033 have been known to occasionally be defective upon arrival. They're usually only available from AliExpress.
 - For battery management, use either U4 *or* U5 and supporting components. **Do not** use U4 and U5 simultaneously on one board. They will interfere with each other.
 - Kb is kilo**bits** and Mb is mega**bits**. Sometimes you will find game ROM and RAM sizes defined in terms of KB or kilo**bytes** and MB or mega**bytes**. You can convert Kb and Mb to KB and MB by dividing Kb or Mb by 8. For example, 256 Kb = 32 KB.
@@ -112,10 +108,13 @@ Please carefully review the parts you need for the board you are trying to make.
 ## Revision History
 
 ### v1.2
-- Replace new battery management circuitry with TPS3613-based circuit
+- Replace non-donor battery management circuitry with a TPS3613-based circuit for smaller BOM and easier routing
 
 ### v1.1
+- Moved all parts on the top down to allow for compatibility with DMG-style shells
+- Rotated battery for more space
 - Widen SRAM footprint for easier soldering
+- Renamed some reference designators for consistency between designs
 - Changed silkscreen for clarity
 
 ### v1.0
@@ -129,6 +128,7 @@ Please carefully review the parts you need for the board you are trying to make.
 - <a href="https://wiki.tauwasser.eu/view/MBC1">Tauwasser's Wiki</a>
 - <a href="https://www.gbxcart.com/">insideGadgets discord server for GBxCart RW compatibility requirements</a>
 - <a href="https://www.alldatasheet.com/datasheet-pdf/pdf/99104/MITSUBISHI/MM1026.html">System Reset IC Datasheet</a>
+- <a href="https://www.ti.com/lit/ds/symlink/tps3613-01.pdf?HQS=dis-mous-null-mousermode-dsf-pf-null-wwe&ts=1698238885366&ref_url=https%253A%252F%252Feu.mouser.com%252F">TPS3613 Datasheet</a>
 - Board outline modified from <a href="https://tinkerer.us/projects/homebrew-gameboy-cartridge.html">Dillon Nichols's Homebrew Gameboy Cartridge project</a>
 - Thank you to <a href="https://github.com/Gekkio">gekkio</a> for their deep Game Boy knowledge resources, and for collaboration in demystifying some of the design choices on Game Boy cartridges
 - Thanks to the awesome members of the <a href="https://moddedgameboy.club/">Modded Gameboy Club</a> for their feedback and support during the entire project development
