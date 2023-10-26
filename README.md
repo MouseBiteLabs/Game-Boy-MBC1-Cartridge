@@ -10,8 +10,7 @@ This circuit board should cover most, if not all, MBC1 games. The features are a
 - Lower battery consumption compared to some of the original cartridges
 - Fully compatible with the <a href="https://www.gbxcart.com/">GBxCart RW</a> so you can transfer games and save files to and from the board
 
-[image of board scan]
-[image of assembled board]
+![image](https://github.com/MouseBiteLabs/Game-Boy-MBC1-Cartridge/assets/97127539/88bd86bd-153e-4295-8945-b19e01dc9103)
 
 All gerbers and source files can be found in this repo, as this project is fully open source. Technical documentation of the board can be found in the Technical folder.
 
@@ -29,11 +28,9 @@ The zipped folder contains all the gerber files for this board. The following op
 
 You can use the zipped folder at any board fabricator you like. You may also buy the board from PCBWay using this link (disclosure: I receive 10% of the sale value to go twoards future PCB orders of my own):
 
-[link]
+[add link]
 
-The board is also listed on OshPark as well. **Be sure to get them in 0.8mm thickness if you order from here.**
-
-[link]
+<a href="https://oshpark.com/shared_projects/7kJfLORO">The board is also listed on OSH Park as well.</a> **Be sure to get them in 0.8mm thickness if you order from here.**
 
 ## Board Configurations
 
