@@ -154,7 +154,7 @@ The RAM_/CS output of the MBC1 is connected to the /Y input (pin 7) of the MM113
 
 Because the MM1026 does not have the gated /CS output functionality, and the MBC1 is not powered by the battery on my cart design, we need to add the function back with some external components, which I have labelled as "Group C" components in the schematic.
 
-![image](https://github.com/MouseBiteLabs/Game-Boy-MBC1-Cartridge/assets/97127539/c44980fd-c0c3-4ae2-b036-da2e0ddbdf2c)
+![image](https://github.com/MouseBiteLabs/Game-Boy-MBC1-Cartridge/assets/97127539/8b9af296-a584-4daa-824b-f9b86082ddb4)
 
 As a reminder: RAM_/CS connects to the MBC1's RAM_/CS output pin, RAM_/CS_G connects to the SRAM's /CE input, and VCC_SRAM connects to the MM1026 VOUT pin.
 
