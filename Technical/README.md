@@ -35,7 +35,7 @@ The connections to the address and data pins here are mostly self-explanatory. H
     - In 64K SRAM mode: R4 will pull pin 1 on the SRAM to GND. This is NC on 64K SRAM chips, and A14 on 256K SRAM chips which will be unused in 64K mode.
     - In 256K SRAM mode: R5 and R6 will pull the upper unused address pins of the EEPROM to GND.
 
-![image](https://github.com/MouseBiteLabs/Game-Boy-MBC1-Cartridge/assets/97127539/529e90e0-a2d0-435f-b0b7-637d69f4c916)
+image
 
 Other pins include: 
 
