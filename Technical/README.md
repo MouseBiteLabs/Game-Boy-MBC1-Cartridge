@@ -35,7 +35,7 @@ The connections to the address and data pins here are mostly self-explanatory. H
     - In 64K SRAM mode: R4 will pull pin 1 on the SRAM to GND. This is NC on 64K SRAM chips, and A14 on 256K SRAM chips which will be unused in 64K mode.
     - In 256K SRAM mode: R5 and R6 will pull the upper unused address pins of the EEPROM to GND.
 
-image
+![image](https://github.com/MouseBiteLabs/Game-Boy-MBC1-Cartridge/assets/97127539/928e7bcc-cdb0-44dd-8cb8-78eb2b47fd5e)
 
 Other pins include: 
 
@@ -136,7 +136,7 @@ For reference again, here is a pinout diagram of the MM1026 and MM1134.
 
 And here is the section of the schematic for using one of these chips ("Group A" components).
 
-![image](https://github.com/MouseBiteLabs/Game-Boy-MBC1-Cartridge/assets/97127539/29036016-eedb-467e-bcba-bc3544090d6c)
+![image](https://github.com/MouseBiteLabs/Game-Boy-MBC1-Cartridge/assets/97127539/28d35d98-ce20-4379-8131-2e3df5720db8)
 
 #### Creating the Battery-Backed Power Supply
 
@@ -154,7 +154,7 @@ The RAM_/CS output of the MBC1 is connected to the /Y input (pin 7) of the MM113
 
 Because the MM1026 does not have the gated /CS output functionality, and the MBC1 is not powered by the battery on my cart design, we need to add the function back with some external components, which I have labelled as "Group C" components in the schematic.
 
-![image](https://github.com/MouseBiteLabs/Game-Boy-MBC1-Cartridge/assets/97127539/8b9af296-a584-4daa-824b-f9b86082ddb4)
+![image](https://github.com/MouseBiteLabs/Game-Boy-MBC1-Cartridge/assets/97127539/8a6cc931-1e40-4af1-b359-2de8ab8acf11)
 
 As a reminder: RAM_/CS connects to the MBC1's RAM_/CS output pin, RAM_/CS_G connects to the SRAM's /CE input, and VCC_SRAM connects to the MM1026 VOUT pin.
 
@@ -167,11 +167,11 @@ Thus, this circuit essentially adds the MM1134's gated /CS output functionality 
 
 If you do not have one of these MM chips, as you can only typically get them from donor Game Boy cartridges and not all games use them, you can achieve the same results using commercially-available components. In order to do so, you need to populate "Group B" components which features the TPS3613 - a Texas Instruments chip that is almost identical to the MM1134, with a few minor differences.
 
-![image](https://github.com/MouseBiteLabs/Game-Boy-MBC1-Cartridge/assets/97127539/5608a590-62e2-46fe-aa85-e2584f2e187e)
+![image](https://github.com/MouseBiteLabs/Game-Boy-MBC1-Cartridge/assets/97127539/ecbeeedb-ec24-4204-88d6-f9e8cc8cf5c1)
 
 Here is the timing diagram from the TPS3613 datasheet, showing the relations between the inputs and outputs of the chip.
 
-![image](https://github.com/MouseBiteLabs/Game-Boy-MBC1-Cartridge/assets/97127539/9c4e5c75-83a6-443b-a1a0-359774fa2a3c)
+![image](https://github.com/MouseBiteLabs/Game-Boy-MBC1-Cartridge/assets/97127539/6c6149f9-d40f-4ec4-b151-b59f4dcc069b)
 
 #### Creating the Battery-Backed Power Supply
 
@@ -216,7 +216,7 @@ Just backup your save data within a decade of making the cart and you'll be fine
 
 I added spots for a few extra capacitors, in the event some compatibility issues arise. By default, you should ignore these components, as they were not present in most cartridges. If I find instances where they are needed, I will note them in this repo. For now, assume they are unnecessary.
 
-![image](https://github.com/MouseBiteLabs/Game-Boy-MBC1-Cartridge/assets/97127539/fb1feef2-3c5d-4b55-8d21-5d1030760569)
+![image](https://github.com/MouseBiteLabs/Game-Boy-MBC1-Cartridge/assets/97127539/8e5285e4-f13a-4778-973c-cb9ec47e1660)
 
 1) C9 is a capacitor connected nearby the MBC1's /WR pin to GND. These were populated on some cartridges, and have a value of approximately 1 nF (0.001 uF).
 2) C10 is a capacitor connected nearby the MBC1's /RESET pin to GND. A spot for this capacitor was included on some MBC1 carts, but I cannot locate an instance of it actually being used when looking through the gbhwdb. I don't actually know what value this capacitor would need to be, so I am guessing 1 nF.
