@@ -91,7 +91,7 @@ Please carefully review the parts you need for the board you are trying to make.
 | U2                    | MBC1                           | SOP-24           | MBC1 Mapper        | x             | x                                | x                                | x                                | Donor MBC1 Game Boy cartridge                    |
 | U3                    | AS6C6264, AS6C62256            | SOP-28           | SRAM               |               | x                                | x                                | x                                | [https://mou.sr/450klcY](https://mou.sr/450klcY) |
 | U4                    | MM1026, MM1134, BA6129, BA6735 | SOIC-8           | Battery Management |               | x                                | x                                |                                  | Donor Game Boy cartridge                         |
-| U5                    | TPS3613                        |                  | Battery Management |               |                                  |                                  | x                                | https://mou.sr/45Ir2kh                           |
+| U5                    | TPS3613                        | MSOP-10          | Battery Management |               |                                  |                                  | x                                | https://mou.sr/45Ir2kh                           |
 
 ## Things to Remember
 
