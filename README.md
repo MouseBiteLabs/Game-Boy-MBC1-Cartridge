@@ -115,7 +115,7 @@ Please carefully review the parts you need for the board you are trying to make.
 - Changed silkscreen for clarity
 
 ### v1.0
-- Release revision
+- Prototype revision
 
 ## Resources and Acknowledgements
 
