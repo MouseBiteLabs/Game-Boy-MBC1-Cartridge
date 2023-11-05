@@ -18,6 +18,8 @@ All gerbers and source files can be found in this repo, as this project is fully
 
 I am not responsible for any damage you do to your self or your property. I do not guarantee design compatibility. You may encounter issues with certain games! Attempt this project at your own risk.
 
+If you are using this board to make games other than for personal use, **you must have permission from the originator to use and distrubte any ROM images or other material.** Do not use this board for profiting from stolen work - this esepcially includes homebrew content, ROM hacks, and fan-made labels.
+
 ## Board Characteristics and Order Information
 
 The zipped folder contains all the gerber files for this board. The following options **must** be chosen when ordering boards for yourself.
@@ -30,7 +32,7 @@ You can use the zipped folder at any board fabricator you like. You may also buy
 
 [add link]
 
-<a href="https://oshpark.com/shared_projects/7kJfLORO">The board is also listed on OSH Park as well.</a> **Be sure to get them in 0.8mm thickness if you order from here.**
+<a href="https://oshpark.com/shared_projects/oQU5rnMg">The board is also listed on OSH Park as well.</a> **Be sure to get them in 0.8mm thickness if you order from here.**
 
 ## Board Configurations
 
@@ -104,8 +106,12 @@ Please carefully review the parts you need for the board you are trying to make.
 
 ## Revision History
 
+### v1.3
+- Extended cart edge down by 0.3 mm for better fitment
+- Added OSHW logo and "SUPPORT ORIGINAL CREATORS!"
+
 ### v1.2
-- Replace non-donor battery management circuitry with a TPS3613-based circuit for smaller BOM and easier routing
+- Replaced non-donor battery management circuitry with a TPS3613-based circuit for smaller BOM and easier routing
 
 ### v1.1
 - Moved all parts on the top down to allow for compatibility with DMG-style shells
