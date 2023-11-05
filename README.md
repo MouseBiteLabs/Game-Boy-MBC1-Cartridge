@@ -18,7 +18,7 @@ All gerbers and source files can be found in this repo, as this project is fully
 
 I am not responsible for any damage you do to your self or your property. I do not guarantee design compatibility. You may encounter issues with certain games! Attempt this project at your own risk.
 
-If you are using this board to make games other than for personal use, **you must have permission from the originator to use and distrubte any ROM images or other material.** Do not use this board for profiting from stolen work - this esepcially includes homebrew content, ROM hacks, and fan-made labels.
+If you are using this board to make games other than for personal use, **you must have permission from the originator to use and distrubte any ROM images or other material.** You are responsible for making sure you adhere to any license requirements. DO NOT use my circuit boards for profiting from stolen work - this especially includes homebrew content, ROM hacks, and fan-made labels.
 
 ## Board Characteristics and Order Information
 
