@@ -10,7 +10,7 @@ This circuit board should cover most, if not all, MBC1 games. The features are a
 - Lower battery consumption compared to some of the original cartridges
 - Fully compatible with the <a href="https://www.gbxcart.com/">GBxCart RW</a> so you can transfer games and save files to and from the board
 
-![image](https://github.com/MouseBiteLabs/Game-Boy-MBC1-Cartridge/assets/97127539/58a17400-d374-467c-aacb-95edc6bcb59b)
+![image](https://github.com/MouseBiteLabs/Game-Boy-MBC1-Cartridge/assets/97127539/7c91e6f3-dea6-4841-877e-699310f80821)
 
 All gerbers and source files can be found in this repo, as this project is fully open source. Technical documentation of the board can be found in the Technical folder.
 
@@ -18,7 +18,7 @@ All gerbers and source files can be found in this repo, as this project is fully
 
 I am not responsible for any damage you do to your self or your property. I do not guarantee design compatibility. You may encounter issues with certain games! Attempt this project at your own risk.
 
-If you are using this board to make games other than for personal use, **you must have permission from the originator to use and distrubte any ROM images or other material.** You are responsible for making sure you adhere to any license requirements. DO NOT use my circuit boards for profiting from stolen work - this especially includes homebrew content, ROM hacks, and fan-made labels.
+If you are using this board to make games other than for personal use, **you must have permission from the originator to use and distribute any ROM images or other related material.** You are responsible for making sure you adhere to any license requirements. DO NOT use my circuit boards for profiting from stolen work - this especially includes homebrew content, ROM hacks, and using fan-made labels without permission from the originator.
 
 ## Board Characteristics and Order Information
 
@@ -32,7 +32,7 @@ You can use the zipped folder at any board fabricator you like. You may also buy
 
 [add link]
 
-<a href="https://oshpark.com/shared_projects/oQU5rnMg">The board is also listed on OSH Park as well.</a> **Be sure to get them in 0.8mm thickness if you order from here.**
+<a href="https://oshpark.com/shared_projects/ZMBZcBb1">The board is also listed on OSH Park as well.</a> **Be sure to get them in 0.8mm thickness if you order from here.**
 
 ## Board Configurations
 
@@ -42,19 +42,19 @@ The board comes with four sets of jumper pads for solder bridges. SJ1 and SJ2 re
 
 These two sets of pads are labelled "RAM SIZE" in the middle of the board. Soldering them will configure the max RAM *and* ROM size. You must configure these pads for every game you make - do not leave them empty (if you have no SRAM, solder to the "64K" setting to maximize ROM space). <a href="https://catskull.net/gb-rom-database/">You can find a list of games here with their respective ROM and RAM sizes.</a>
 
-- Solder bridge SJ1 and SJ2 from their middle pads to the bottom pads for games that have larger RAM sizes (up to 4 Mb of ROM and up to 256 Kb of RAM).
-
 - Solder bridge SJ1 and SJ2 from their middle pads to the top pads for games that have larger ROM sizes (up to 16 Mb of ROM and up to 64 Kb of RAM).
+
+- Solder bridge SJ1 and SJ2 from their middle pads to the bottom pads for games that have larger RAM sizes (up to 4 Mb of ROM and up to 256 Kb of RAM).
 
 - SJ1 and SJ2 must be soldered in the same direction.
 
 - The footprint of these selection pads should allow for a DPDT switch, part number CAS-220A1, to be placed on these pads instead of having to bridge the pads with solder.
 
-[picture]
+![image](https://github.com/MouseBiteLabs/Game-Boy-MBC1-Cartridge/assets/97127539/57846ac0-cdca-4912-9b03-7f5d932ba882)
 
 ### Using an MM1134 or BA6735 for U4 (SJ3)
 
-Bridge the jumper SJ4 if you have either an MM1134 or BA6735 for U4, specifically. Any other battery management IC must leave SJ3 unsoldered.
+Bridge the jumper SJ3 if you have either an MM1134 or BA6735 for U4, specifically. Any other battery management IC must leave SJ3 unsoldered.
 
 ### Making Games Without RAM (SJ4)
 
@@ -62,7 +62,7 @@ If your game does not have RAM on it (and therefore, you don't need the battery 
 
 ## Bill of Materials (BOM)
 
-Your parts list will vary depending on the game you are trying to make, and what chips you have for the battery management (if any). Note that C9 - C11 footprints are only included for edge cases that may require them; you can ignore them unless you run into issues.
+Your parts list will vary depending on the game you are trying to make, and what chips you have for the battery management (if any). Note that C9 - C11 footprints are only included for edge cases that may require them; you can ignore them.
 
 Please carefully review the parts you need for the board you are trying to make. Do not add any parts to your build that don't appear in the column for the game you are making. This means you *cannot* populate every component on the board at the same time.
 
@@ -75,9 +75,6 @@ Please carefully review the parts you need for the board you are trying to make.
 | C6                    | 10uF                           | 0603             | Capacitor (MLCC)   |               | x                                | x                                | x                                | [https://mou.sr/3mZtSkF](https://mou.sr/3mZtSkF) |
 | C7                    | 0.1uF                          | 0603             | Capacitor (MLCC)   | x             | x                                | x                                | x                                | [https://mou.sr/3ENc15O](https://mou.sr/3ENc15O) |
 | C8                    | 0.1uF                          | 0603             | Capacitor (MLCC)   |               |                                  |                                  | x                                | [https://mou.sr/3ENc15O](https://mou.sr/3ENc15O) |
-| C9                    | 0.001uF                        | 0603             | Capacitor (MLCC)   |               |                                  |                                  |                                  | [https://mou.sr/3PpAXoM](https://mou.sr/3PpAXoM) |
-| C10                   | 0.001uF                        | 0603             | Capacitor (MLCC)   |               |                                  |                                  |                                  | [https://mou.sr/3PpAXoM](https://mou.sr/3PpAXoM) |
-| C11                   | 0.001uF                        | 0603             | Capacitor (MLCC)   |               |                                  |                                  |                                  | [https://mou.sr/3PpAXoM](https://mou.sr/3PpAXoM) |
 | Q1                    | 2N7002                         | SOT-23           | N-Channel FET      |               |                                  |                                  | x                                | [https://mou.sr/3rgfh6J](https://mou.sr/3rgfh6J) |
 | Q2                    | 2N7002                         | SOT-23           | N-Channel FET      |               |                                  | x                                |                                  | [https://mou.sr/3rgfh6J](https://mou.sr/3rgfh6J) |
 | R1                    | 10k                            | 0603             | Resistor           |               | x                                | x                                | x                                | [https://mou.sr/3riR7IH](https://mou.sr/3riR7IH) |
@@ -98,8 +95,9 @@ Please carefully review the parts you need for the board you are trying to make.
 ## Things to Remember
 
 - The footprint for the EEPROM is specifically for 29F016 - it has 48 pins. However, 29F032 and 29F033 are only 40 pin devices. They still work fine on the board though - place them in the center of the footprint, and leave the outer two pins on each corner empty
-- The 29F016, 29F032, and 29F033 have been known to occasionally be defective upon arrival. They're usually only available from AliExpress.
-- The footprint for the battery can fit a CR2032, CR2025, or CR2016 with solder tabs. The only difference is the mAh capacity (larger number = longer life).
+- The 29F016, 29F032, and 29F033 have been known to occasionally be defective upon arrival. They're either used, or new old stock, and usually only available from AliExpress.
+- The footprint for the battery can fit a CR2032, CR2025, or CR2016 with solder tabs. The only difference is the mAh capacity (larger number = longer life). If you get Panasonic tabbed batteries, you may have to trim the battery tabs to make them fit on the footprint.
+  - For untabbed coin cells, you can find battery retainer adapters online, <a href="https://retrogamerepairshop.com/products/hdr-game-boy-game-battery-retainer?variant=40511013290156">like this one.</a>
 - For battery management, use either U4 *or* U5 and supporting components. **Do not** use U4 and U5 simultaneously on one board. They will interfere with each other.
 - Kb is kilo**bits** and Mb is mega**bits**. Sometimes you will find game ROM and RAM sizes defined in terms of KB or kilo**bytes** and MB or mega**bytes**. You can convert Kb and Mb to KB and MB by dividing Kb or Mb by 8. For example, 256 Kb = 32 KB.
 - You only need to provide ROM and RAM chips that have at least *or greater* the size of the game you are trying to make. That means you can use a 256Kb SRAM chip for a game that only requires 64Kb!
@@ -107,7 +105,7 @@ Please carefully review the parts you need for the board you are trying to make.
 ## Revision History
 
 ### v1.3
-- Extended cart edge down by 0.3 mm for better fitment
+- Extended cart edge down by 0.25 mm for better fitment
 - Added OSHW logo and "SUPPORT ORIGINAL CREATORS!"
 
 ### v1.2
