@@ -20,6 +20,8 @@ I am not responsible for any damage you do to your self or your property. I do n
 
 If you are using this board to make games other than for personal use, **you must have permission from the originator to use and distribute any ROM images or other related material.** You are responsible for making sure you adhere to any license requirements. DO NOT use my circuit boards for profiting from stolen work - this especially includes homebrew content, ROM hacks, and using fan-made labels without permission from the originator.
 
+**Please note that version 1.3 is technically untested, however, the only consequential change is an additional 0.25 mm on the bottom of the board edge for better fitment, so I don't expect issues.**
+
 ## Board Characteristics and Order Information
 
 The zipped folder contains all the gerber files for this board. The following options **must** be chosen when ordering boards for yourself.
