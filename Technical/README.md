@@ -4,14 +4,14 @@ This write-up will serve as an attempt of explaining some of the features on thi
 
 ## Schematic
 
-![image](https://github.com/MouseBiteLabs/Game-Boy-MBC1-Cartridge/assets/97127539/d64e9f84-38c7-4899-81bc-2b77d6dac638)
+![image](https://github.com/MouseBiteLabs/Game-Boy-MBC1-Cartridge/assets/97127539/371b160b-005a-4995-b2d4-85e91957d703)
 
 ## Cart Edge Pins
 
 Very briefly, I will categorize the different pins on the 32-pin cartridge edge connector.
 
 - Pin 1 and pin 32 are VCC and GND, respectively.
-- Pin 2 is the CLK or PHI pin. This is not used on the MBC1 cartridge.
+- Pin 2 is the CLK or PHI pin. These are not used on the MBC1 cartridge.
 - Pin 3 is the /WR pin, pin 4 is the /RD pin, pin 5 is the /CS pin. These signals partially determine when data is read from the ROM or when data is read/written to the RAM.
 - Pins 6 through 21 are the address pins A0 through A15.
 - Pins 22 through 29 are the data pins D0 through D7.
@@ -175,26 +175,20 @@ Here is the timing diagram from the TPS3613 datasheet, showing the relations bet
 
 #### Creating the Battery-Backed Power Supply
 
-Like the MM chips, VOUT is created by VCC or VBAT. But instead of a hard internal threshold, the output of this pin is determined by the voltage on the SENSE pin. If the voltage on SENSE is above an internal set voltage of 1.15 V (shown as VIT in the diagram), VOUT is equivalent to VCC. When the SENSE voltage drops below VIT, VOUT switches over to being powered by VBAT instead - no matter if VBAT is higher or lower than VCC.
+Like the MM chips, VOUT is created by VCC or VBAT. But instead of a hard internal threshold, the output of this pin is determined by the voltage on the SENSE pin. If the voltage on SENSE is above an internal set voltage of 1.15 V (shown as VIT in the diagram), VOUT is equivalent to VCC. When the SENSE voltage drops below VIT, and when VCC drops below VBAT, VOUT switches over to being powered by VBAT instead.
 
 The voltage on SENSE is determined by the voltage divider made with R9 and R10. The MM chips have an internal threshold of 4.2 V for determining that the power is going off and the /RESET outputs should be asserted to protect the RAM from spurious writes. So for this design, I'll stick to that threshold.
-
-The thing about the TPS chip though is that when voltage on the VOUT pin switches over from the VCC input to the VBAT input, the voltage will be driven to the battery voltage *even if it's lower than VCC*. On the MM chips, the VOUT pin follows whichever is higher. The issue with this is if for some reason when the voltage switches over to VBAT, the supply pin of the SRAM will be powered by a 3 V source - but the I/O of the SRAM will still be referenced to the decreasing voltage on VCC. We need to ensure the voltage on the supply pin of the RAM is close enough to the voltage seen on the I/O to prevent damage to the RAM. On the AS6C62256 datasheet, the max limit of an input pin voltage is whatever is on the supply pin plus 0.5 V.
-
-So, the requirement is basically that the voltage on the VCC_SRAM net discharges slower than the voltage on the VCC net. To ensure this, we can lower the current draw on the VCC_SRAM net, as well as raise the bulk capacitance on this net so that it takes longer to discharge.
-
-Luckily, the only thing VOUT is connected to that draws power is the RAM. And after the switchover to VBAT happens on the TPS chip, the SRAM will also be put into a low power mode, so it's current draw is much lower. Adding C6 on the VCC_SRAM net for a bulk capacitance further lengthens the time it takes for VCC_SRAM to discharge down until it reaches the voltage on VOUT, which will be the battery voltage. By the time this happens, VCC should be sufficiently discharged.
 
 #### Reset Pin Management
 
 The /RESET and RESET outputs of the TPS3613 are push-pull. This is slightly inconvenient, because it means you cannot directly connect them to the /RST pin on the cart edge (pin 30), because as discussed earlier, any connection to this pin must be open collector. So, we just have to make it open collector (or in this case, open drain). Adding Q1, an N-channel MOSFET, achieves this. 
 
 - When voltage on the SENSE pin is above the internal 1.15V threshold, the /RESET output pin is asserted high allowing the MBC1 to function, and the RESET output pin is asserted low. This will keep Q1 off and allow /RST, pin 30 on the cart edge, to float.
-- When voltage on the SENSE pin drops below the internal 1.15V threshold, the /RESET output pin is asserted low turning off the MBC1, and the RESET output pin is asserted high. This will turn Q1 on, and pull pin 30 on the cart edge to GND.
+- When voltage on the SENSE pin drops below the internal 1.15V threshold, the /RESET output pin is asserted low turning off the MBC1, and the RESET output pin is asserted high. This will turn Q1 on, and pull pin 30 on the cart edge to GND. Note that the positive RESET output follows the voltage on the VDD pin, so once the 5V supply on the Game Boy depletes, Q1 will be off again, but since there will be no power to the MBC1, this doesn't make a difference.
 
 #### Controlling the SRAM /CE Pin
 
-The /CEIN input and /CEOUT output pins of the TPS3613 acts exactly like the /Y input and /CS output pins of the MM1134 - /CEOUT will follow /CEIN as long as the voltage on the SENSE pin is above 1.15V. So the RAM_/CS output is wired similarly to the MM1134 implementation.
+The /CEIN input and /CEOUT output pins of the TPS3613 act exactly like the /Y input and /CS output pins of the MM1134 - /CEOUT will follow /CEIN as long as the voltage on the SENSE pin is above 1.15V. So the RAM_/CS output is wired similarly to the MM1134 implementation.
 
 ## Estimating Battery Life
 
