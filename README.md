@@ -28,9 +28,13 @@ The zipped folder contains all the gerber files for this board. The following op
 - Surface Finish: ENIG
 - Gold Fingers: Yes, 30° chamfer
 
+**Currently not selling on Etsy, but will in the future. Stay tuned.**
+
+<a href="https://www.etsy.com/shop/MouseBiteLabs"><img src="https://github-production-user-asset-6210df.s3.amazonaws.com/97127539/239718536-5c9aefe3-0628-4434-b8d8-55ff80ac3bbc.png" alt="PCB from Etsy" /></a> 
+
 You can use the zipped folder at any board fabricator you like. You may also buy the board from PCBWay using this link (disclosure: I receive 10% of the sale value to go twoards future PCB orders of my own):
 
-[add link]
+<a href="https://www.pcbway.com/project/shareproject/Game_Boy_MBC1_Cartridge_9115d770.html"><img src="https://www.pcbway.com/project/img/images/frompcbway-1220.png" alt="PCB from PCBWay" /></a>
 
 <a href="https://oshpark.com/shared_projects/ZMBZcBb1">The board is also listed on OSH Park as well.</a> **Be sure to get them in 0.8mm thickness if you order from here.**
 
@@ -59,6 +63,16 @@ Bridge the jumper SJ3 if you have either an MM1134 or BA6735 for U4, specificall
 ### Making Games Without RAM (SJ4)
 
 If your game does not have RAM on it (and therefore, you don't need the battery management IC U4), bridge SJ4 with solder. **Do not** bridge SJ4 if you are using U5 (TPS3613) instead of U4.
+
+## Test Points
+
+On the back of the board are five test points. Here's where they are connected:
+
+- TP1: SRAM supply voltage
+- TP2: Battery voltage (after R1)
+- TP3: Battery voltage (positive terminal of battery)
+- TP4: Ground
+- TP5: VCC input voltage
 
 ## Bill of Materials (BOM)
 
