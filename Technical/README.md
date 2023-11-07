@@ -202,7 +202,7 @@ So for an overall equation to determine the very approximate number of years the
 
 Years = Resistance of R1 (ohms) * Battery capacity (mAh) / Voltage (mV) / 8760 
 
-For an example: an MBC1 cartridge where R1 is 10 kΩ (or 10000 Ω), using a CR2025 rated for 165 mAh, and a voltage of 10 mV measured across the terminals of R1, yields 10000 * 165 / 10 / 8760 = 18.84 years of battery survival. This number can be different due to changing environmental conditions, self-discharge of the battery, and also actual capacity of the battery - discharging a battery at very small currents will increase its apparent capacity.
+For an example: an MBC1 cartridge where R1 is 10 kΩ (or 10000 Ω), using a CR2025 rated for 165 mAh, and a voltage of 10 mV measured across the terminals of R1, yields 10000 * 165 / 10 / 8760 = 18.84 years of battery survival. This number can be different due to changing environmental conditions, self-discharge of the battery, and also actual capacity of the battery - discharging a battery at very small currents will increase its apparent capacity, and as the voltage decreases, the current required for data retention decreases as well.
 
 Just backup your save data within a decade of making the cart and you'll be fine.
 
