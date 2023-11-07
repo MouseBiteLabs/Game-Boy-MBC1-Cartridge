@@ -2,6 +2,8 @@
 
 This write-up will serve as an attempt of explaining some of the features on this cartridge. I won't go into heavy detail about the functionality of the MBC1, but I will attempt to explain some higher level functions and the reasoning behind the circuit.
 
+Please correct me on any information I may have gotten wrong.
+
 ## Schematic
 
 ![image](https://github.com/MouseBiteLabs/Game-Boy-MBC1-Cartridge/assets/97127539/371b160b-005a-4995-b2d4-85e91957d703)
