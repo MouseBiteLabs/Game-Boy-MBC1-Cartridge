@@ -40,6 +40,12 @@ You can use the zipped folder at any board fabricator you like. You may also buy
 
 <a href="https://oshpark.com/shared_projects/ZMBZcBb1">The board is also listed on OSH Park as well.</a> **Be sure to get them in 0.8mm thickness if you order from here.**
 
+## Required Equipment
+
+The EEPROMs on the board needs to be programmed somehow. I recommend using the GBxCart, as mentioned. These boards are fully compatible with it, and it makes reflashing games extremely easy using <a href="https://github.com/lesserkuma/FlashGBX">lesserkuma's FlashGBX software</a>.
+
+Alternatively, you can buy an EEPROM programmer with a TSOP adapter. The downside to this method is that you have to desolder the chip every time you want to program it. The <a href="https://flashcatusb.com/">FlashcatUSB</a> is one popular option in retro spaces.
+
 ## Board Configurations
 
 The board comes with four sets of jumper pads for solder bridges. SJ1 and SJ2 require you to solder bridge the middle pad either to the top pad or the bottom pad. SJ3 and SJ4 are configured by either leaving them alone or bridging them with solder. Here are the situations where you need to add solder bridges.
@@ -66,7 +72,7 @@ Bridge the jumper SJ3 if you have either an MM1134 or BA6735 for U4, specificall
 
 If your game does not have RAM on it (and therefore, you don't need the battery management IC U4), bridge SJ4 with solder. **Do not** bridge SJ4 if you are using U5 (TPS3613) instead of U4.
 
-## Test Points
+## Test Points and FInal Checkout
 
 On the back of the board are five test points. Here's where they are connected:
 
@@ -75,6 +81,10 @@ On the back of the board are five test points. Here's where they are connected:
 - TP3: Battery voltage (positive terminal of battery)
 - TP4: Ground
 - TP5: VCC input voltage
+
+After you assemble your game, you should measure the current out of the battery. But first, you should program it with the GBxCart, or if you programmed the EEPROM separately, put it into a Game Boy and cycle power once. Then, flip the PCB upside down on a non-conductive surface (not your leg), and set your multimeter in DC millivolts (or volts). Put the positive probe on TP3 and the negative probe on TP2. If you used a 10kΩ for R1, as indicated in the BOM, you should read a voltage in the single of millivolts. If you have something much higher, especially voltages above 30mV, then you likely have an issue or short circuit on the board somewhere.
+
+**Note: If using the replacement battery management IC in U5, you need to power up the game at least once before battery currents will make sense.**
 
 ## Bill of Materials (BOM)
 
@@ -144,6 +154,7 @@ Please carefully review the parts you need for the board you are trying to make.
 - <a href="https://catskull.net/gb-rom-database/">Nintendo Gameboy Game List</a>
 - <a href="https://wiki.tauwasser.eu/view/MBC1">Tauwasser's Wiki</a>
 - <a href="https://www.gbxcart.com/">insideGadgets discord server for GBxCart RW compatibility requirements</a>
+- <a href="https://github.com/lesserkuma/FlashGBX">Lesserkuma's FlashGBX software</a>
 - <a href="https://www.alldatasheet.com/datasheet-pdf/pdf/99104/MITSUBISHI/MM1026.html">System Reset IC Datasheet</a>
 - <a href="https://www.ti.com/lit/ds/symlink/tps3613-01.pdf?HQS=dis-mous-null-mousermode-dsf-pf-null-wwe&ts=1698238885366&ref_url=https%253A%252F%252Feu.mouser.com%252F">TPS3613 Datasheet</a>
 - Board outline modified from <a href="https://tinkerer.us/projects/homebrew-gameboy-cartridge.html">Dillon Nichols's Homebrew Gameboy Cartridge project</a>
