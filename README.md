@@ -4,8 +4,8 @@ This is my design of a flashable MBC1-based cartridge for the Game Boy. The MBC1
 
 This circuit board should cover most, if not all, MBC1 games. The features are as follows:
 
-- Able to make games that use 4 Mbit of ROM and 256 Kbit of RAM, or 16 Mbit of ROM and 64 Kbit of RAM, depending on how you configure the jumpers
-- Compatibility with all four of the major Game Boy battery management ICs - MM1026, MM1134, BA6129, and BA6735 (though you may have to add a few extra parts)
+- Able to make games that use 4 Mbit of ROM and 256 Kbit of RAM, or 16 Mbit of ROM and 64 Kbit of RAM
+- Compatibility with all four of the major Game Boy battery management ICs - MM1026, MM1134, BA6129, and BA6735
 - The option to add battery backup to the cartridge *without* the need of the original battery management ICs - perfect for MBC1 donors that didn't have batteries in them
 - Lower battery consumption compared to some of the original cartridges
 - Fully compatible with the <a href="https://www.gbxcart.com/">GBxCart RW</a> so you can transfer games and save files to and from the board
@@ -80,7 +80,7 @@ Bridge the jumper SJ3 if you have either an MM1134 or BA6735 for U4, specificall
 
 If your game does not have RAM on it (and therefore, you don't need the battery management IC U4), bridge SJ4 with solder. **Do not** bridge SJ4 if you are using U5 (TPS3613) instead of U4.
 
-## Test Points and FInal Checkout
+## Test Points and Final Checkout
 
 On the back of the board are five test points. Here's where they are connected:
 
