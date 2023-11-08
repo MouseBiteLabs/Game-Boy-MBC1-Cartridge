@@ -22,7 +22,7 @@ Very briefly, I will categorize the different pins on the 32-pin cartridge edge 
 
 ## MBC1 - Memory Bank Controller
 
-The MBC1 is a pretty simplistic memory mapping chip. I won't go into detail how it operates, because you can find sufficient explanations from <a href="https://wiki.tauwasser.eu/view/MBC1">Tauwasser's website</a>, among others. A high level explanation is that it is used to expand the addressable memory of a Game Boy cartridge. The RA14-RA18 and AA13-AA14 outputs are used to access higher memory banks on the ROM and RAM chips. It also has RAM and ROM chip select outputs to control data access on the ROM and RAM chips, though only the RAM /CS output is commonly used.
+The MBC1 is a pretty simplistic memory mapping chip. I won't go into detail how it operates, because you can find sufficient explanations from <a href="https://wiki.tauwasser.eu/view/MBC1">Tauwasser's website</a>, among others. A high level explanation is that it is used to expand the addressable memory of a Game Boy cartridge. The RA14-RA18 and AA13-AA14 outputs are used to access higher memory banks on the ROM and RAM chips. It also has RAM chip select outputs to control data access on the RAM, though only the RAM /CS output is commonly used.
 
 Further sections will provide more context for some of the MBC1 pins and the logic of how they are connected.
 
