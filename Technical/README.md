@@ -31,7 +31,7 @@ Further sections will provide more context for some of the MBC1 pins and the log
 The connections to the address and data pins here are mostly self-explanatory. However, the upper address pins are controlled by the MBC1.
 - A14 through A18 on the ROM chip are controlled by the RA14 to RA18 outputs from the MBC1.
 - A19 and A20 on the ROM, and A13 and A14 on the RAM, are both controlled by the MBC1's output pins 6 and 7 - but you can only select one set of pins, not both!
-  - This means you can use the MBC1 for games with 4Mb of ROM space and 256Kb of RAM space, *or* 16Mb of ROM space and 64Kb of RAM space. On my cart, this is selected with SJ1 and SJ2.
+  - This means you can use the MBC1 for games with 512 KB (4 Mbit) of ROM space and 256 Kbit of RAM space, *or* 2 MB (16 Mbit) of ROM space and 64 Kbit of RAM space. On my cart, this is selected with SJ1 and SJ2.
   - R3 through R6 on my cart are pull-down resistors for asserting the unused set of two pins to known states to prevent unwanted behavior.
     - In 64K SRAM mode: R3 will pull pin 26 on the SRAM to the CS_OUT pin (which connects to the MM chip CS output pin or the /RESET output pin of TPS3613). On 64K SRAM chips, this is the CE2 pin, and it's normally wired this way on regular carts for low-power data retention mode. If you use a 256K SRAM chip instead, then this is the A13 address pin, and will go unused if using it in 64K mode.
     - In 64K SRAM mode: R4 will pull pin 1 on the SRAM to GND. This is NC on 64K SRAM chips, and A14 on 256K SRAM chips which will be unused in 64K mode.
