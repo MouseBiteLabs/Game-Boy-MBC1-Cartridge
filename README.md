@@ -4,7 +4,7 @@ This is my design of a flashable MBC1-based cartridge for the Game Boy. The MBC1
 
 This circuit board should cover most, if not all, MBC1 games. The features are as follows:
 
-- Able to make games that use 4 Mbit of ROM and 256 Kbit of RAM, or 16 Mbit of ROM and 64 Kbit of RAM
+- Able to make games that use 512 KB (4 Mbit) of ROM and 256 Kbit of RAM, or 2 MB (16 Mbit) of ROM and 64 Kbit of RAM
 - Compatibility with all four of the major Game Boy battery management ICs - MM1026, MM1134, BA6129, and BA6735
 - The option to add battery backup to the cartridge *without* the need of the original battery management ICs - perfect for MBC1 donors that didn't have batteries in them
 - Lower battery consumption compared to some of the original cartridges
@@ -69,9 +69,9 @@ The board comes with four sets of jumper pads for solder bridges. SJ1 and SJ2 re
 
 These two sets of pads are labelled "RAM SIZE" in the middle of the board. Soldering them will configure the max RAM *and* ROM size. You must configure these pads for every game you make - do not leave them empty (if you have no SRAM, solder to the "64K" setting to maximize ROM space). <a href="https://catskull.net/gb-rom-database/">You can find a list of games here with their respective ROM and RAM sizes.</a>
 
-- Solder bridge SJ1 and SJ2 from their middle pads to the top pads for games that have larger ROM sizes (up to 16 Mb of ROM and up to 64 Kb of RAM).
+- Solder bridge SJ1 and SJ2 from their middle pads to the top pads for games that have larger ROM sizes (up to 2 MB, or 16 Mbit of ROM, and up to 64 Kbit of RAM).
 
-- Solder bridge SJ1 and SJ2 from their middle pads to the bottom pads for games that have larger RAM sizes (up to 4 Mb of ROM and up to 256 Kb of RAM).
+- Solder bridge SJ1 and SJ2 from their middle pads to the bottom pads for games that have larger RAM sizes (up to 512 KB, or 4 Mbit of ROM, and up to 256 Kbit of RAM).
 
 - SJ1 and SJ2 must be soldered in the same direction.
 
@@ -157,8 +157,8 @@ If you want to experiment with the capacitors C9 to C11, see this info below. **
 - The footprint for the battery can fit a CR2032, CR2025, or CR2016 with solder tabs. The only difference is the mAh capacity (larger number = longer life). If you get Panasonic tabbed batteries, you may have to trim the battery tabs to make them fit on the footprint.
   - For untabbed coin cells, you can find battery retainer adapters online, <a href="https://retrogamerepairshop.com/products/hdr-game-boy-game-battery-retainer?variant=40511013290156">like this one.</a>
 - For battery management, use either U4 *or* U5 and supporting components. **Do not** use U4 and U5 simultaneously on one board. They will interfere with each other.
-- Kb is kilo**bits** and Mb is mega**bits**. Sometimes you will find game ROM and RAM sizes defined in terms of KB or kilo**bytes** and MB or mega**bytes**. You can convert Kb and Mb to KB and MB by dividing Kb or Mb by 8. For example, 256 Kb = 32 KB.
-- You only need to provide ROM and RAM chips that have at least *or greater* the size of the game you are trying to make. That means you can use a 256Kb SRAM chip for a game that only requires 64Kb!
+- Generally, ROM sizes are conveyed in terms of kilo**bytes** (KB) and mega**bytes** (KB, MB). RAM size is usually conveyed in terms of kilo**bits** or mega**bits** (Kbit, Mbit). You can convert Kbit and Mbit to KB and MB by dividing Kbit or Mbit by 8. For example, 256 Kbit = 32 KB.
+- You only need to provide ROM and RAM chips that have at least *or greater* the size of the game you are trying to make. That means you can use a 256 Kbit SRAM chip for a game that only requires 64 Kbit of RAM!
 
 ## Revision History
 
