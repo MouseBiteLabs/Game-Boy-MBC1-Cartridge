@@ -13,7 +13,7 @@ This circuit board should cover most, if not all, MBC1 games. The features are a
 ![image](https://github.com/MouseBiteLabs/Game-Boy-MBC1-Cartridge/assets/97127539/e0e584c0-530a-43c8-8c5a-c7e0bc1cc743)
 *[Image provided by <a href="https://github.com/emperadur">emperadur</a>]*
 
-![image](https://github.com/MouseBiteLabs/Game-Boy-MBC1-Cartridge/assets/97127539/7c91e6f3-dea6-4841-877e-699310f80821)
+![boardscan2](https://github.com/MouseBiteLabs/Game-Boy-MBC1-Cartridge/assets/97127539/96cbfc59-a1b6-4826-9c98-e721c60e78b2)
 
 All gerbers and source files can be found in this repo, as this project is fully open source. Technical documentation of the board can be found in the Technical folder.
 
