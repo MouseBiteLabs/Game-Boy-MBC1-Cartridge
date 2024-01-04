@@ -1,7 +1,5 @@
 # Game Boy MBC1 Cartridge
 
-**Note: v1.4 has been ordered but is considered untested.**
-
 This is my design of a flashable MBC1-based cartridge for the Game Boy. The MBC1 mapper was used in many of the earlier Game Boy games, such as the Super Mario Land series, the Donkey Kong Land series, Metroid II, and one of my personal favorites - the original Link's Awakening. 
 
 This circuit board should cover most, if not all, MBC1 games. The features are as follows:
