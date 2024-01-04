@@ -27,8 +27,6 @@ All gerbers and source files can be found in this repo, as this project is fully
 
 DO NOT use my circuit boards for profiting from stolen work - this especially includes homebrew content, ROM hacks, and using fan-made labels without permission from the originator. **Support original creators!**
 
-**Please note that version 1.3 is technically untested, however, the only consequential change is an additional 0.25 mm on the bottom of the board edge for better fitment, so I don't expect issues.**
-
 ## Board Characteristics and Order Information
 
 The zipped folder contains all the gerber files for this board. The following options **must** be chosen when ordering boards for yourself.
