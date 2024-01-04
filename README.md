@@ -182,12 +182,12 @@ If you want to experiment with the capacitors C9 to C11, see this info below. **
 
 ## Revision History
 
-### v1.4 (IN PROGRESS)
+### v1.4
 - Reduced cart edge by 0.1 mm for better fitment
 - Adjusted battery placement to support more battery holders
 - Added tabs on the board edges to allow the circuit board to fit better in aftermarket cartridge shells
 
-### v1.3 (FOR SALE)
+### v1.3
 - Extended cart edge down by 0.25 mm for better fitment
 - Added OSHW logo and "SUPPORT ORIGINAL CREATORS!"
 
