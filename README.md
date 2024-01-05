@@ -10,8 +10,7 @@ This circuit board should cover most, if not all, MBC1 games. The features are a
 - Lower battery consumption compared to some of the original cartridges
 - Fully compatible with the <a href="https://www.gbxcart.com/">GBxCart RW</a> so you can transfer games and save files to and from the board
 
-![image](https://github.com/MouseBiteLabs/Game-Boy-MBC1-Cartridge/assets/97127539/e0e584c0-530a-43c8-8c5a-c7e0bc1cc743)
-*[Image provided by <a href="https://github.com/emperadur">emperadur</a>]*
+![assemblepic](https://github.com/MouseBiteLabs/Game-Boy-MBC1-Cartridge/assets/97127539/783c30a9-7183-4456-9f41-9d06237f2962)
 
 ![boardscan3](https://github.com/MouseBiteLabs/Game-Boy-MBC1-Cartridge/assets/97127539/fe4a67d0-7b13-4df1-9544-b3ef1da7e6f5)
 
